@@ -17,3 +17,5 @@ RUN pip install -r requeriments.txt --no-cache-dir
 COPY . .
 
 EXPOSE 8000
+
+ENTRYPOINT [ "/entrypoint.sh" ]
