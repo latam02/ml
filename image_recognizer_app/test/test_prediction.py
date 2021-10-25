@@ -19,7 +19,7 @@ class TestPrediction(TestCase):
     """Unitary tests for Prediction class"""
     # Test positive case
     def test_prediction(self):
-        BASE_DIR1 = Path(__file__).resolve().parent.parent.parent.parent.parent
+        BASE_DIR1 = Path(__file__).resolve().parent.parent.parent
         filepath = str(BASE_DIR1) + '/resources_test/ml_image_test/positive'
         d = Prediction(filepath, 'pug', '50')
         result = d.predict('nasnet')
@@ -30,13 +30,13 @@ class TestPrediction(TestCase):
     def test_prediction_ErrorName(self):
         with self.assertRaises(FileException):
 
-            BASE_DIR2 = Path(__file__).resolve().parent.parent.parent.parent.parent
+            BASE_DIR2 = Path(__file__).resolve().parent.parent.parent
             filepath = str(BASE_DIR2) + '/resources_test/ml_image_test/negative/'
             d = Prediction(filepath, 'pug', '50')
             d.predict('vgg16')
     # Test positive case when no word is passed to Prediction
     def test_prediction_NoWord(self):
-        BASE_DIR1 = Path(__file__).resolve().parent.parent.parent.parent.parent
+        BASE_DIR1 = Path(__file__).resolve().parent.parent.parent
         filepath = str(BASE_DIR1) + '/resources_test/ml_image_test/positive'
         d = Prediction(filepath, '', '50')
         result = d.predict('nasnet')
