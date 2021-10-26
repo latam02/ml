@@ -8,7 +8,7 @@ pipeline {
           }
       }
       steps { 
-          sh 'pip install -r requeriments.txt'
+          sh 'pip install -r requirements.txt'
           sh 'echo new > report.html'
           sh 'ls -la'
       }
