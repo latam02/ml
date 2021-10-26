@@ -9,8 +9,8 @@ pipeline {
           }
       }
       steps { 
-          sh 'pip3 install --upgrade pip'
-          sh 'pip3 install pytest'
+          //sh 'pip3 install --upgrade pip'
+          sh 'pip3 install --user pytest'
           sh 'python -m pytest -vv ./image_recognizer_app/test'
           sh 'mkdir -p dir1/reports/html'
           sh 'echo reports > dir1/reports/html/index.html'
