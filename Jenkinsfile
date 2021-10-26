@@ -9,8 +9,8 @@ pipeline {
           }
       }
       steps {   
-          
-          sh 'pip install -r requirements.txt'
+          sh 'pip install --upgrade pip'
+          sh 'pip install -r requirements.txt --no-cache-dir'
           sh 'python -m pytest -vv ./image_recognizer_app/test'
           sh 'mkdir -p dir1/reports/html'
           sh 'echo reports > dir1/reports/html/index.html'
