@@ -1,11 +1,14 @@
 pipeline {
+  options {
+      timeout(time: 1, unit: 'HOURS') 
+  }
   agent any
   stages {
     stage('UnitTest') {
       agent {
         docker { 
           image 'crgv/python-c:3.8.12'
-          args '--name python-c-ut'
+          
           }
       }
       steps {   
