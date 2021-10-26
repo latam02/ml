@@ -2,12 +2,12 @@ pipeline {
   agent any
   stages {
     stage('UnitTest') {
-      // agent {
-      //   docker { 
-      //     image 'tensorflow/tensorflow:2.6.0'
-      //     args '--name python-c-ut'
-      //     }
-      // }
+      agent {
+        docker { 
+          image 'python-c:3.8.12'
+          args '--name python-c-ut'
+          }
+      }
       steps {   
           
           sh 'pip install -r requirements.txt'
