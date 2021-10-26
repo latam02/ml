@@ -4,8 +4,8 @@ pipeline {
     stage('UnitTest') {
       agent {
         docker { 
-          image 'tensorflow/tensorflow:2.6.0'
-          args '--name python-c-ut'
+          image 'crgv/python-c:3.8.12'
+          args '-v ${HOST_WORKSPACE}:/tmp/reports --user jenkins'
           }
       }
       steps { 
