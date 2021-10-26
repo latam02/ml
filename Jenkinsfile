@@ -3,14 +3,14 @@ pipeline {
   stages {
     stage('UnitTest') {
       agent {
-        docker { 
-          image 'tensorflow/tensorflow:2.6.0'
-          args '--name python-c-ut'
-          }
-      }
-      steps { 
-          //sh 'pip3 install --upgrade pip'
-          sh 'pip3 install --user pytest'
+      //   docker { 
+      //     image 'tensorflow/tensorflow:2.6.0'
+      //     args '--name python-c-ut'
+      //     }
+      // }
+      steps {   
+          
+          sh 'pip install -r requirements.txt'
           sh 'python -m pytest -vv ./image_recognizer_app/test'
           sh 'mkdir -p dir1/reports/html'
           sh 'echo reports > dir1/reports/html/index.html'
