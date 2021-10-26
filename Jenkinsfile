@@ -9,7 +9,7 @@ pipeline {
           }
       }
       steps { 
-          
+          sh 'pip install pytest'
           sh 'python -m pytest -vv ./image_recognizer_app/test'
           sh 'mkdir -p dir1/reports/html'
           sh 'echo reports > dir1/reports/html/index.html'
