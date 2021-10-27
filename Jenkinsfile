@@ -18,7 +18,6 @@ pipeline {
           sh 'python -m pytest -vv ./image_recognizer_app/test/'
           sh 'echo new > report.html'
           sh 'ls -la'
-          sh 'tail -f /dev/null'
       }
       post {
         always {
