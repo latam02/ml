@@ -16,12 +16,11 @@ pipeline {
       steps { 
           sh 'pip install -r requirements.txt --no-cache-dir'
           sh 'python -m pytest -vv ./image_recognizer_app/test/test_nasnet.py'
-          sh 'echo new > report.html'
-          sh 'ls -la'
+          sh 'python -m pytest --html=../../report.html -s'
       }
       post {
         always {
-          archiveArtifacts artifacts: '**/*.html', followSymlinks: false
+          archiveArtifacts artifacts: 'report.html', followSymlinks: false
         }
       }
     }
