@@ -10,7 +10,7 @@ pipeline {
     stage('UnitTest') {
       agent {
         docker { 
-          image 'crgv/python-c:3.8.12'
+          image 'crgv/tensorflow-c:2.6.0'
           }
       }
       steps { 
