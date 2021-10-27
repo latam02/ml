@@ -1,4 +1,10 @@
 pipeline {
+  // options {
+  //     timeout(time: 1, unit: 'HOURS') 
+  // }
+  // enviroments{
+  //   SONAR_TOKEN = credentials('variable jenkins')
+  // }
   agent any
   stages {
     stage('UnitTest') {
@@ -12,6 +18,7 @@ pipeline {
           sh 'python -m pytest -vv ./image_recognizer_app/test/test_nasnet.py'
           sh 'echo new > report.html'
           sh 'ls -la'
+          sh 'tail -f /dev/null'
       }
       post {
         always {
