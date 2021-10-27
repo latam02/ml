@@ -14,7 +14,7 @@ pipeline {
           }
       }
       steps {
-          sh 'apt-get update -y' 
+          
           sh 'pip install --upgrade pip'
           sh 'apt-get -y install ffmpeg libsm6 libxext6  -y'
           sh 'pip install -r requirements.txt --no-cache-dir'
