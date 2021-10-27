@@ -18,7 +18,7 @@ class TestResnet(TestCase):
     """ Unitary test for Resnet class"""
     # Positive case
     def test_resnet(self):
-        BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent
+        BASE_DIR = Path(__file__).resolve().parent.parent.parent
         filepath = str(BASE_DIR) + '/resources_test/ml_image_test/positive/0843.jpg'
         d = ResNet()
         d.start()
