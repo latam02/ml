@@ -18,8 +18,8 @@ class TestNasnet(TestCase):
     """" Unitary Test for Nasnet class"""
     # Positive case
     def test_nas_net(self):
-        BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent
-        filepath = str(BASE_DIR) + '/resources_test/ml_image_test/001.jpg'
+        BASE_DIR = Path(__file__).resolve().parent.parent.parent
+        filepath = str(BASE_DIR) + '/resources_test/ml_image_test/positive/001.jpg'
         d = NasNet()
         d.start()
         result = d.predict(filepath)
