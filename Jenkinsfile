@@ -10,15 +10,15 @@ pipeline {
     stage('UnitTest') {
       agent {
         docker { 
-          image 'crgv/tensorflow-c:2.6.0'
+          image 'crgv/python-c:3.8.12'
           }
       }
       steps { 
-          sh 'tail -f /dev/null'
-          // sh 'pip install -r requirements.txt --no-cache-dir'
-          // sh 'python -m pytest -vv ./image_recognizer_app/test/test_nasnet.py'
-          // sh 'echo new > report.html'
-          // sh 'ls -la'
+          // sh 'tail -f /dev/null'
+          sh 'pip install -r requirements.txt --no-cache-dir'
+          sh 'python -m pytest -vv ./image_recognizer_app/test/test_nasnet.py'
+          sh 'echo new > report.html'
+          sh 'ls -la'
       }
       post {
         always {
