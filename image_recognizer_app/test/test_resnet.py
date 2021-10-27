@@ -19,7 +19,7 @@ class TestResnet(TestCase):
     # Positive case
     def test_resnet(self):
         BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent
-        filepath = str(BASE_DIR) + '/resources_test/ml_image_test/0843.jpg'
+        filepath = str(BASE_DIR) + '/workspace/ml_fc-jenkins@2/resources_test/ml_image_test/0843.jpg'
         d = ResNet()
         d.start()
         result = d.predict(filepath)

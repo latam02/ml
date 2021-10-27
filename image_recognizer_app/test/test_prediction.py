@@ -20,7 +20,7 @@ class TestPrediction(TestCase):
     # Test positive case
     def test_prediction(self):
         BASE_DIR1 = Path(__file__).resolve().parent.parent.parent
-        filepath = str(BASE_DIR1) + '/resources_test/ml_image_test/positive'
+        filepath = str(BASE_DIR1) + '/workspace/ml_fc-jenkins@2/resources_test/ml_image_test/positive'
         d = Prediction(filepath, 'pug', '50')
         result = d.predict('nasnet')
         expected = 1

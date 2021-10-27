@@ -19,7 +19,7 @@ class TestVgg16(TestCase):
     # Positive case
     def test_vgg16(self):
         BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent
-        filepath = str(BASE_DIR) + '/resources_test/ml_image_test/2.jpg'
+        filepath = str(BASE_DIR) + '/workspace/ml_fc-jenkins@2/resources_test/ml_image_test/2.jpg'
         d = Vgg16()
         d.start()
         result = d.predict(filepath)
