@@ -16,7 +16,6 @@ pipeline {
       steps {
           
           sh 'pip install --upgrade pip'
-          sh 'sudo -H apt-get -y install ffmpeg libsm6 libxext6  -y'
           sh 'pip install -r requirements.txt --no-cache-dir'
           sh 'tail -f /dev/null'
           sh 'python -m pytest -vv ./image_recognizer_app/test/test_nasnet.py'
