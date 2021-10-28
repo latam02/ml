@@ -15,7 +15,7 @@ pipeline {
       }
       steps { 
           sh 'pip install -r requirements.txt --no-cache-dir'
-          sh 'python -m pytest -vv ./image_recognizer_app/test/test_nasnet.py'
+          sh 'python -m pytest -vv ./image_recognizer_app/test/'
           sh 'python -m pytest --html=report.html -s'
       }
       post {
