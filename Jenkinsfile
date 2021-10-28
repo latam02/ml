@@ -8,7 +8,7 @@ pipeline {
           }
       }
       steps { 
-          ssh 'pip install --upgrade pip'
+          sh 'pip install --upgrade pip'
           sh 'pip install -r requirements.txt --no-cache-dir'
           sh 'python -m pytest --html=report.html -s'
       }
