@@ -1,10 +1,4 @@
 pipeline {
-  // options {
-  //     timeout(time: 1, unit: 'HOURS') 
-  // }
-  // enviroments{
-  //   SONAR_TOKEN = credentials('variable jenkins')
-  // }
   agent any
   stages {
     stage('UnitTest') {
