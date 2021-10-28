@@ -14,8 +14,8 @@ import datetime
 from .nasnet import NasNet
 from .resnet import ResNet
 from .result import Result
-from .vgg16 import Vgg16
-from .yolo import Yolo
+#from .vgg16 import Vgg16
+#from .yolo import Yolo
 from ..exceptions.file_exception import FileException
 
 
@@ -23,7 +23,7 @@ class Prediction:
     """Performs object detection on all images in a directory"""
 
     def __init__(self, folder, word, percentage):
-        self.models = {'nasnet': NasNet(), 'resnet': ResNet(), 'vgg16': Vgg16(), 'yolo': Yolo()}
+        self.models = {'nasnet': NasNet(), 'resnet': ResNet()}
         self.folder = folder
         self.word = word
         self.confidence = float(percentage)
