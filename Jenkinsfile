@@ -17,8 +17,8 @@ pipeline {
           
           sh 'pip install --upgrade pip'
           sh 'pip install -r requirements.txt --no-cache-dir'
-          sh 'tail -f /dev/null'
-          sh 'python -m pytest -vv ./image_recognizer_app/test/test_nasnet.py'
+          // sh 'tail -f /dev/null'
+          // sh 'python -m pytest -vv ./image_recognizer_app/test/test_nasnet.py'
           sh 'echo new > report.html'
           sh 'ls -la'
       }
