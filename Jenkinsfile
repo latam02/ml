@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  enviroment{
+    SONAR_TOKEN = credentials('sonar_token')
+  }
   stages {
     stage('UnitTest') {
       agent {
@@ -16,6 +19,11 @@ pipeline {
         always {
           archiveArtifacts artifacts: 'report.html', followSymlinks: false
         }
+      }
+    }
+    stage('codeQuality'){
+      steps{
+        sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner   -Dsonar.organization=latam02mlfc   -Dsonar.projectKey=MachineLearningFC   -Dsonar.sources=.   -Dsonar.host.url=https://sonarcloud.io'
       }
     }
   }
