@@ -2,6 +2,10 @@ pipeline {
   agent any
   environment{
     SONAR_TOKEN = credentials('sonar_token')
+    DOCKER_USER = 'lcarrieta'
+    DOCKER_PASSWORD = credentials('docker_pass')
+    IMAGE_NAME ='ml-lc'
+    TAG_VERSION = '1.0'
   }
   stages {
     stage('UnitTest') {
@@ -34,6 +38,24 @@ pipeline {
             waitForQualityGate abortPipeline: true
           }
         }
+    }
+    stage('Package') {
+      steps {
+        sh 'docker build -t ${IMAGE_NAME}:${TAG_VERSION} .'
+      }
+    }
+    stage('Publish') {
+      steps {
+        sh 'docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}'
+        sh 'docker tag ${IMAGE_NAME}:${TAG_VERSION} ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}'
+        sh 'docker push ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}'
+      }
+
+    }
+    stage('Deploy') {
+      steps {
+        sh 'echo deploy'
+      }
     }
   }
 } 
