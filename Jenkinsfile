@@ -26,7 +26,15 @@ pipeline {
         sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner -Dsonar.organization=latam02-lc-ml -Dsonar.projectKey=lc-ml -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io'
       }
     }
-    stage("Quality Gate") {
+    stage("build & SonarQube analysis") {
+            agent any
+            steps {
+              withSonarQubeEnv('https://sonarcloud.io/project/overview?id=lc-ml') {
+                sh 'mvn clean package sonar:sonar'
+              }
+            }
+          }
+          stage("Quality Gate") {
             steps {
               timeout(time: 1, unit: 'HOURS') {
                 waitForQualityGate abortPipeline: true
@@ -34,4 +42,4 @@ pipeline {
             }
           }
   }
-}
+} 
