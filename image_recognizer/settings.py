@@ -74,19 +74,19 @@ WSGI_APPLICATION = 'image_recognizer.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['SQL_DATABASE'],
-        'USER': os.environ['SQL_USER'],
-        'PASSWORD': os.environ['SQL_PASSWORD'],
-        'HOST': os.environ['SQL_HOST'],
-        'DATABASE_PORT':os.environ['SQL_PORT'],
-        'OPTIONS': {
-            'client_encoding': 'UTF8'
-             }
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': os.environ['SQL_DATABASE'],
+#         'USER': os.environ['SQL_USER'],
+#         'PASSWORD': os.environ['SQL_PASSWORD'],
+#         'HOST': os.environ['SQL_HOST'],
+#         'DATABASE_PORT':os.environ['SQL_PORT'],
+#         'OPTIONS': {
+#             'client_encoding': 'UTF8'
+#              }
+#     }
+# }
 
 
 # Password validation
