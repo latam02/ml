@@ -18,4 +18,4 @@ COPY . .
 
 EXPOSE 8000
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "tail -f /dev/null" ]
