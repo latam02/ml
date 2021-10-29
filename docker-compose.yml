@@ -13,7 +13,7 @@ services:
          - "5432:5432"
 
     app:
-      image: ml
+      image: machine_learning_fc
       volumes:
         - ./:/usr/src/app
       ports:

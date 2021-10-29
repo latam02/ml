@@ -59,7 +59,8 @@ pipeline {
 
     stage('Deploy'){
       steps {
-        sh 'docker run -d ${IMAGE_NAME}:${TAG_VERSION}'
+        sh 'docker-compose up -d'
+        // sh 'docker run -d ${IMAGE_NAME}:${TAG_VERSION}'
       }
     }
   }
