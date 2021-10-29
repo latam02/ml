@@ -18,4 +18,5 @@ COPY . .
 
 EXPOSE 8000
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+# ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT ["python","./ConvertVideo/convert_service/manage.py","runserver"]
