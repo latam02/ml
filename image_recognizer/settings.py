@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'image_recognizer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['SQL_DATABASE'],
-        'USER': os.environ['SQL_USER'],
-        'PASSWORD': os.environ['SQL_PASSWORD'],
-        'HOST': os.environ['SQL_HOST'],
-        'DATABASE_PORT':os.environ['SQL_PORT'],
+        'NAME': 'atlatam',
+        'USER': 'atlatam',
+        'PASSWORD': 'atlatam',
+        'HOST': 'postgresql',
+        'DATABASE_PORT':'5432',
         'OPTIONS': {
             'client_encoding': 'UTF8'
              }
