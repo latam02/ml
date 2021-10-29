@@ -59,7 +59,7 @@ pipeline {
 
     stage('Deploy'){
       steps {
-        sh 'docker run ${IMAGE_NAME}:${TAG_VERSION}'
+        sh 'docker run -d ${IMAGE_NAME}:${TAG_VERSION}'
       }
     }
   }
