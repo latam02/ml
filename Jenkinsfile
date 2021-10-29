@@ -21,12 +21,12 @@ pipeline {
     //     }
     //   }
     // }
-    stage('codeQuality'){
-      steps{
-        sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner -Dsonar.organization=latam02-lc-ml -Dsonar.projectKey=lc-ml -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io'
-      }
-    }
-    stage("build & SonarQube analysis") {
+    // stage('codeQuality'){
+    //   steps{
+    //     sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner -Dsonar.organization=latam02-lc-ml -Dsonar.projectKey=lc-ml -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io'
+    //   }
+    // }
+    stage("SonarQube analysis") {
       steps {
           withSonarQubeEnv('sonarqube') {
               sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner -Dsonar.organization=latam02-lc-ml -Dsonar.projectKey=lc-ml -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io'
