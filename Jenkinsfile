@@ -39,19 +39,18 @@ pipeline {
     //       }
     //     }
     // }
-    // stage('Package') {
-    //   steps {
-    //     sh 'docker build -t ${IMAGE_NAME}:${TAG_VERSION} .'
-    //   }
-    // }
-    // stage('Publish') {
-    //   steps {
-    //     sh 'docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}'
-    //     sh 'docker tag ${IMAGE_NAME}:${TAG_VERSION} ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}'
-    //     sh 'docker push ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}'
-    //   }
-
-    // }
+    stage('Package') {
+      steps {
+        sh 'docker build -t ${IMAGE_NAME}:${TAG_VERSION} .'
+      }
+    }
+    stage('Publish') {
+      steps {
+        sh 'docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}'
+        sh 'docker tag ${IMAGE_NAME}:${TAG_VERSION} ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}'
+        sh 'docker push ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}'
+      }
+    }
     stage('Deploy') {
       steps {
         sh 'docker-compose up -d'
