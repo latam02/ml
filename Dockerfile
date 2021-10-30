@@ -14,7 +14,7 @@ COPY ./requirements-prod.txt .
 
 RUN pip install -r requirements-prod.txt --no-cache-dir
 
-COPY ./code ./code
+COPY . .
 
 EXPOSE 8000
 
