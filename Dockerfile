@@ -14,8 +14,9 @@ COPY ./requirements-prod.txt .
 
 RUN pip install -r requirements-prod.txt --no-cache-dir
 
-COPY . .
+COPY ./code ./code
 
 EXPOSE 8000
 
-ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+#ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+ENTRYPOINT ["tail", "-f", "/dev/null"]

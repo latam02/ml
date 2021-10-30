@@ -14,7 +14,7 @@ services:
          - "5432:5432"
 
     app:
-      image: ml-lc:1.0
+      image: lcarrieta/ml-lc:1.0
       volumes:
         - ./:/usr/src/app
       ports:
