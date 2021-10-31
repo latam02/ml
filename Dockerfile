@@ -12,7 +12,7 @@ RUN apt-get update -y && \
 
 COPY ./requirements-prod.txt ./usr/src/app/requirements.txt
 
-RUN pip install -r requirements-prod.txt --no-cache-dir
+RUN pip install -r requirements.txt --no-cache-dir
 
 COPY . ./usr/src/app
 
