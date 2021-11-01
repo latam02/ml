@@ -5,7 +5,7 @@ pipeline {
     DOCKER_USER = 'lcarrieta'
     DOCKER_PASSWORD = credentials('docker_pass')
     IMAGE_NAME ='ml-lc'
-    TAG_VERSION = '1.1'
+    TAG_VERSION = '1.2'
   }
   stages {
     // stage('UnitTest') {
