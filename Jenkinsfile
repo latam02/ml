@@ -7,7 +7,7 @@ pipeline {
     IMAGE_NAME='machine_learning_fc'
     TAG_VERSION='1.0'
   }
-  // stages {
+  stages {
   //   stage('UnitTest') {
   //     agent {
   //       docker { 
