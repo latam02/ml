@@ -19,5 +19,5 @@ COPY . .
 EXPOSE 8000
 
 #ENTRYPOINT [ "bash", "/entrypoint.sh" ]
-#ENTRYPOINT [ "python", "./ml/manage.py", "runserver", "0.0.0.0:8000" ]
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
