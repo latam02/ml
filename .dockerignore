@@ -1,0 +1,10 @@
+README.md
+.git
+.gitignore
+.dockerignore
+Dockerfile
+docker-compose.yml
+requirements-dev.txt
+requirements-prod.txt
+/resources_test
+JenkinsFile
