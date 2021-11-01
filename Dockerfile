@@ -14,10 +14,10 @@ COPY ./requirements-prod.txt /usr/src/app/requirements.txt
 
 RUN pip install -r requirements.txt --no-cache-dir
 
-COPY . /usr/src/app/ml
+COPY . /usr/src/app
 
 EXPOSE 8000
 
-ENTRYPOINT [ "/ml/entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
 #ENTRYPOINT [ "python", "./ml/manage.py", "runserver", "0.0.0.0:8000" ]
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
