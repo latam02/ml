@@ -25,7 +25,7 @@ services:
         - postgresql
 
 volumes:
-    postgres_data:
-      name: postgres_data
-    ml:
-      name: ml
+  postgres_data:
+    name: postgres_data
+  ml:
+    name: ml
