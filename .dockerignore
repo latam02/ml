@@ -5,6 +5,5 @@ README.md
 Dockerfile
 docker-compose.yml
 requirements-dev.txt
-requirements-prod.txt
 /resources_test
 JenkinsFile
