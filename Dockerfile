@@ -10,7 +10,7 @@ RUN apt-get update -y && \
     pip install --upgrade pip && \
     apt -y install python3-dev libpq-dev
 
-COPY ./requirements.txt .
+COPY ./requirements-prod.txt .
 
 RUN pip install -r requirements.txt --no-cache-dir
 

@@ -15,7 +15,7 @@ pipeline {
           }
       }
       steps { 
-          sh 'pip install -r requirements.txt --no-cache-dir'
+          sh 'pip install -r requirements-dev.txt --no-cache-dir'
           sh 'pip install --upgrade pip'
           sh 'python -m pytest --html=report.html -s'
       }
