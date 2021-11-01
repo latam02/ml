@@ -14,7 +14,7 @@ services:
          - "5432:5432"
 
     app:
-      image: ml-lc:1.2
+      image: ml-lc:1.3
       volumes:
         - ml:/usr/src/app
       ports:
@@ -26,4 +26,6 @@ services:
 
 volumes:
     postgres_data:
+      name: postgres_data
     ml:
+      name: ml

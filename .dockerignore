@@ -1,7 +1,6 @@
 README.md
 .git
 .gitignore
-.dockerignore
 Dockerfile
 docker-compose.yml
 requirements-dev.txt
