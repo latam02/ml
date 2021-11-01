@@ -7,25 +7,24 @@ pipeline {
     IMAGE_NAME='machine_learning_fc'
     TAG_VERSION='1.0'
   }
-  stages {
-    stage('UnitTest') {
-      agent {
-        docker { 
-          image 'crgv/tensorflow-c:2.6.2'
-          }
-      }
-      steps { 
-          sh 'pip install -r requirements.txt --no-cache-dir'
-          // sh 'python -m pytest -vv ./image_recognizer_app/test/'
-          sh 'pip install --upgrade pip'
-          sh 'python -m pytest --html=report.html -s'
-      }
-      post {
-        always {
-          archiveArtifacts artifacts: 'report.html', followSymlinks: false
-        }
-      }
-    }
+  // stages {
+  //   stage('UnitTest') {
+  //     agent {
+  //       docker { 
+  //         image 'crgv/tensorflow-c:2.6.2'
+  //         }
+  //     }
+  //     steps { 
+  //         sh 'pip install -r requirements.txt --no-cache-dir'
+  //         sh 'pip install --upgrade pip'
+  //         sh 'python -m pytest --html=report.html -s'
+  //     }
+  //     post {
+  //       always {
+  //         archiveArtifacts artifacts: 'report.html', followSymlinks: false
+  //       }
+  //     }
+  //   }
 
     stage("codeQuality") {
       steps {
