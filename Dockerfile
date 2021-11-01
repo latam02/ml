@@ -18,4 +18,6 @@ COPY . /usr/src/app
 
 EXPOSE 8000
 
-ENTRYPOINT [ "bash", "/entrypoint.sh" ]
+#ENTRYPOINT [ "bash", "/entrypoint.sh" ]
+#ENTRYPOINT [ "python", "./ml/manage.py", "runserver", "0.0.0.0:8000" ]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
