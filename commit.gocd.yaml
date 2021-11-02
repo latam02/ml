@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  test1:
+  ml_fc:
     group: latam02-ml
     label_template: ${COUNT}
     lock_behavior: none
