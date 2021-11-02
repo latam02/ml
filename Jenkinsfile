@@ -17,7 +17,7 @@ pipeline {
       steps { 
           sh 'pip install --upgrade pip'
           sh 'pip install -r requirements-dev.txt --no-cache-dir'
-          sh 'python -m pytest --cov=myproj --html=report.html -s'
+          sh 'python -m pytest --html=report.html -s'
       }
       post {
         always {
