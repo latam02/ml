@@ -12,7 +12,7 @@ pipelines:
         auto_update: true
         branch: develop
     stages:
-    - step1:
+    - UnitTest:
         fetch_materials: true
         keep_artifacts: false
         clean_workspace: false
@@ -20,12 +20,14 @@ pipelines:
           type: success
           allow_only_on_success: false
         jobs:
-          hi:
+          unit:
+            resources:
+              - ubuntu
             timeout: 0
             tasks:
             - exec:
                 arguments:
-                - hello
-                - world
-                command: echo
+                - -c
+                - pip install -r requirements-dev.txt --no-cache-dir
+                command: bash
                 run_if: passed
