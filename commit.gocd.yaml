@@ -30,6 +30,5 @@ pipelines:
                 arguments:
                 - -c
                 - pip install -r requirements-dev.txt --no-cache-dir
-                - you
-                command: echo
+                command: bash
                 run_if: passed
