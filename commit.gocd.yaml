@@ -5,6 +5,11 @@ pipelines:
     label_template: ${COUNT}
     lock_behavior: none
     display_order: -1
+    environment_variables:
+      IMAGE_NAME='machine_learning_fc'
+      TAG_VERSION='1.0'
+    secure_variables:
+      SONAR_TOKEN: AES:4qNwR8qnZidaUGtW0TCOHg==:/G/YyOHurwxv+irvSCX4jfc0KVBeeNZMjdEWrHl7nGKtBqL7ugbfpmIZZqSjXVDI
     materials:
       repo:
         git: https://github.com/latam02/ml.git
@@ -14,11 +19,6 @@ pipelines:
     stages:
     - UnitTest:
         fetch_materials: true
-        keep_artifacts: false
-        clean_workspace: false
-        approval:
-          type: success
-          allow_only_on_success: false
         jobs:
           unit:
             resources:
@@ -28,6 +28,33 @@ pipelines:
             - exec:
                 arguments:
                 - -c
-                - pip install -r requirements-dev.txt --no-cache-dir
+                - pip3 install -r requirements-dev.txt --no-cache-dir
+                command: bash
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - pip3 install --upgrade pip
+                command: bash
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - python3.8 -m pytest --html=report.html -s
+                command: bash
+                run_if: passed
+
+    - codeQuality:
+        fetch_materials: true
+        jobs:
+          unit:
+            resources:
+              - centos
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - -c
+                - /var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner   -Dsonar.organization=latam02mlfc   -Dsonar.projectKey=MachineLearningFC   -Dsonar.sources=.   -Dsonar.host.url=https://sonarcloud.io
                 command: bash
                 run_if: passed
