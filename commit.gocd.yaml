@@ -28,13 +28,13 @@ pipelines:
             - exec:
                 arguments:
                 - -c
-                - pip3 install -r requirements-dev.txt --no-cache-dir
+                - pip install -r requirements-dev.txt --no-cache-dir
                 command: bash
                 run_if: passed
             - exec:
                 arguments:
                 - -c
-                - pip3 install --upgrade pip
+                - pip install --upgrade pip
                 command: bash
                 run_if: passed
             - exec:
