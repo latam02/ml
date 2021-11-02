@@ -22,7 +22,7 @@ pipelines:
         jobs:
           unit:
             resources:
-              - ubuntu
+              - test
             timeout: 0
             tasks:
             - exec:
