@@ -22,7 +22,7 @@ pipelines:
         jobs:
           unit:
             resources:
-              - test
+              - docker
             timeout: 0
             tasks:
             - exec:
