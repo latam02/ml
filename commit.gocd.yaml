@@ -22,7 +22,7 @@ pipelines:
         jobs:
           unit:
             resources:
-              - docker
+              - ubuntu
             timeout: 0
             tasks:
             - exec:
