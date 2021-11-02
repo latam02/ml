@@ -10,7 +10,7 @@ pipelines:
         git: https://github.com/latam02/ml.git
         shallow_clone: false
         auto_update: true
-        branch: develop
+        branch: task8_fc
     stages:
     - UnitTest:
         fetch_materials: true
