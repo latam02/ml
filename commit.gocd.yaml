@@ -13,7 +13,7 @@ pipelines:
         auto_update: true
         branch: Task7_docker-hub
     stages:
-    - Step1:
+    - UnitTest:
         fetch_materials: true
         keep_artifacts: false
         clean_workspace: false
@@ -21,13 +21,15 @@ pipelines:
           type: success
           allow_only_on_success: false
         jobs:
-          iCu:
+          require:
+            resources:
+              - ubuntu
             timeout: 0
             tasks:
             - exec:
                 arguments:
-                - I
-                - see
+                - -c
+                - pip install -r requirements-dev.txt --no-cache-dir
                 - you
                 command: echo
                 run_if: passed
