@@ -55,6 +55,6 @@ pipelines:
             - exec:
                 arguments:
                 - -c
-                - /var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner   -Dsonar.organization=latam02mlfc   -Dsonar.projectKey=MachineLearningFC   -Dsonar.sources=.   -Dsonar.host.url=https://sonarcloud.io
+                - /home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner   -Dsonar.organization=latam02mlfc   -Dsonar.projectKey=MachineLearningFC   -Dsonar.sources=.   -Dsonar.host.url=https://sonarcloud.io
                 command: bash
                 run_if: passed
