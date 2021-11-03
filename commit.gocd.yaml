@@ -7,9 +7,9 @@ pipelines:
     display_order: -1
     environment_variables:
       IMAGE_NAME: 'ml-lc'
-    TAG_VERSION: '1.4'
+      TAG_VERSION: '1.4'
     secure_variables:
-      SONAR_TOKEN: AES:yMMekAUxCQnMmWYQpxhpVQ==:vULu/s5BuPBEkgpaxeTQQTx1P8c6yCL7zjx1MMD9jPTv3OjzJLdn2WAiyEPK8E6+
+      SONAR_TOKEN: AES:W6eO02eVmIqIiPPEE6c/2g==:LXZHrYVFo0oVf+5XOhU5/CLRpByPXQZRaHPM5rfY7ARRYTMKYLSUKkCzI64CiNO7
     materials:
       repo:
         git: https://github.com/latam02/ml.git
