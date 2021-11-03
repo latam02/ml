@@ -29,13 +29,13 @@ pipelines:
             - exec:
                 arguments:
                 - -c
-                - pip install -r requirements-dev.txt --no-cache-dir
+                - pip install -r requirements-dev-gocd.txt --no-cache-dir
                 command: bash
                 run_if: passed
             - exec:
                 arguments:
                 - -c
-                - python -m pytest --html=report.html -s
+                - python3 -m pytest --html=report.html -s
                 command: bash
                 run_if: passed
 
