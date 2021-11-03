@@ -29,7 +29,7 @@ pipelines:
             - exec:
                 arguments:
                 - -c
-                - pip install -r requirements-dev-gocd.txt --no-cache-dir
+                - pip3 install -r requirements-dev-gocd.txt --no-cache-dir
                 command: bash
                 run_if: passed
             - exec:
