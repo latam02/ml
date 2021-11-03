@@ -8,9 +8,9 @@ pipelines:
     environment_variables:
       IMAGE_NAME: 'ml-lc'
       TAG_VERSION: '1.4'
+      DOCKER_USER: lcarrieta
     secure_variables:
       SONAR_TOKEN: AES:W6eO02eVmIqIiPPEE6c/2g==:LXZHrYVFo0oVf+5XOhU5/CLRpByPXQZRaHPM5rfY7ARRYTMKYLSUKkCzI64CiNO7
-      DOCKER_USER: lcarrieta
       DOCKER_PASSWORD: AES:ajqqg2pax4hFAe6FWT8qvg==:uzt9moJerSWdXe+EIDi/q1xJchvDPjsYs17Uud7++w8=
     materials:
       repo:
@@ -23,7 +23,7 @@ pipelines:
     - UnitTest:
         fetch_materials: true
         jobs:
-          require:
+          tester:
             resources:
               - ubuntu
             timeout: 0
@@ -40,11 +40,14 @@ pipelines:
                 - python3 -m pytest --html=report.html -s
                 command: bash
                 run_if: passed
+            artifacts:
+              - build: 
+                  source: requierements-dev.txt
 
     - CodeQuality:
         fetch_materials: true
         jobs:
-          require:
+          code:
             resources:
               - centos
             timeout: 0
@@ -58,7 +61,7 @@ pipelines:
     - Package:
         fetch_materials: true
         jobs:
-          require:
+          packager:
             resources:
               - docker
             timeout: 0
@@ -72,7 +75,7 @@ pipelines:
     - Publish:
         fetch_materials: true
         jobs:
-          require:
+          publisher:
             resources:
               - docker
             timeout: 0
