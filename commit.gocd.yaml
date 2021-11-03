@@ -47,7 +47,7 @@ pipelines:
                 run_if: passed
             artifacts:
               -build:
-                source: report.html
+                  source: report.html
 
     - codeQuality:
         fetch_materials: true
