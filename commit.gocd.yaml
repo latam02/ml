@@ -46,7 +46,7 @@ pipelines:
                 command: bash
                 run_if: passed
             artifacts:
-              -build:
+              - build:
                   source: report.html
 
     - codeQuality:
