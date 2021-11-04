@@ -42,7 +42,7 @@ pipelines:
                 command: bash
                 run_if: passed
 
-    - codeQuality:
+    - acceptanceTesting:
         fetch_materials: true
         jobs:
           unit:
