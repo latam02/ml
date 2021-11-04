@@ -21,7 +21,7 @@ pipelines:
               - docker
             timeout: 0
             tasks:
-            - fetch_artifact:
+            - fetch:
               pipeline: ml_fc
               stage: Publish
               job: publisher_job
