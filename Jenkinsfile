@@ -59,7 +59,7 @@ pipeline {
   }
   post {
         always {
-            emailext body: 'This is a test email by LC', recipientProviders: [buildUser()], subject: 'Test email', to: 'ml.lc.jenkins@gmail.com'
+            emailext body: 'this is a test email', subject: 'test email', to: ' ml.lc.jenkins@gmail.com'
         }
     }
 } 
