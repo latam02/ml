@@ -1,0 +1,57 @@
+format_version: 10
+pipelines:
+  ml-lc_acceptance:
+    group: latam02-ml
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    environment_variables:
+      IMAGE_NAME: 'ml-lc'
+      TAG_VERSION: '1.4'
+    materials:
+      ml-lc:
+        pipeline: ml-lc
+        stage: Publish
+    stages:
+    - Deployment:
+        fetch_materials: false
+        jobs:
+          deploy:
+            resources:
+              - docker
+            timeout: 0
+            tasks:
+            - fetch:
+                pipeline: ml-lc
+                stage: Publish
+                job: publisher
+                source: docker-compose.yml
+                run_if: passed
+                is_file: true
+            - fetch:
+                pipeline: ml-lc
+                stage: Publish
+                job: publisher
+                source: .env.dev
+                run_if: passed
+                is_file: true  
+            - exec:
+                arguments:
+                - -c
+                - docker-compose up -d
+                command: bash
+                
+    - acceptance_test:
+        fetch_materials: true
+        jobs:
+          test:
+            resources:
+              - centos
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - -c
+                - echo run acceptance tests 
+                command: bash
+                run_if: passed
