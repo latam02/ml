@@ -31,6 +31,12 @@ pipeline {
               sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner -Dsonar.organization=latam02-lc-ml -Dsonar.projectKey=lc-ml -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io'
             }
           }
+      post {
+        success {
+            mail bcc: '', body: 'exito', cc: '', from: '', replyTo: '', subject: 'hola', to: 'ml.lc.jenkins@gmail.com'
+            echo 'success'
+        }
+    }
     }
     stage("Quality Gate") {
        steps {
