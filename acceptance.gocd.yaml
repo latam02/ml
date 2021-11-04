@@ -22,12 +22,12 @@ pipelines:
             timeout: 0
             tasks:
             - fetch:
-              pipeline: ml_fc
-              stage: Publish
-              job: publisher_job
-              src: docker-compose.yml
-              run_if: passed
-              is_file: true
+                pipeline: ml_fc
+                stage: Publish
+                job: publisher_job
+                src: docker-compose.yml
+                run_if: passed
+                is_file: true
             - exec:
                 arguments:
                 - -c
