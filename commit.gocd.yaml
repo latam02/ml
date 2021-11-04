@@ -42,7 +42,7 @@ pipelines:
                 run_if: passed
             artifacts:
               - build: 
-                  source: godata/pipelines/ml-lc/report.html
+                  source: report.html
 
     - CodeQuality:
         fetch_materials: true
