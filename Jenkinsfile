@@ -33,7 +33,7 @@ pipeline {
           }
       post {
         failure {
-            mail bcc: '', body: 'failure', cc: '', from: '', replyTo: '', subject: 'failed stage Code Quality', to: 'ml.lc.jenkins@gmail.com'
+            mail bcc: '', body: 'There was an eror and Code Quality Stage Failed', cc: '', from: '', replyTo: '', subject: 'Stage CodeQuality Failed', to: 'ml.lc.jenkins@gmail.com'
         }
     }
     }
@@ -45,7 +45,7 @@ pipeline {
         }
       post {
         failure {
-            mail bcc: '', body: 'failure', cc: '', from: '', replyTo: '', subject: 'failed stage Quality Gate', to: 'ml.lc.jenkins@gmail.com'
+            mail bcc: '', body: 'There was an eror and Quality Gate Stage Failed', cc: '', from: '', replyTo: '', subject: 'Stage Quality Gate Failed', to: 'ml.lc.jenkins@gmail.com'
         }
     }
        
@@ -69,11 +69,11 @@ pipeline {
     // }
   }
   post {  
-        failure {
-            mail bcc: '', body: 'fail', cc: '', from: '', replyTo: '', subject: 'fail at the end', to: 'ml.lc.jenkins@gmail.com'
+       aborted {
+            mail bcc: '', body: 'Ther was an aborted stage during Pipeline execution', cc: '', from: '', replyTo: '', subject: 'Aborted Stage', to: 'ml.lc.jenkins@gmail.com'
         }
-        aborted {
-            mail bcc: '', body: 'fail', cc: '', from: '', replyTo: '', subject: 'ther was an aborted stage', to: 'ml.lc.jenkins@gmail.com'
+       success {
+            mail bcc: '', body: 'The execution of the Pipeline was successful', cc: '', from: '', replyTo: '', subject: 'Successful Pipeline execution', to: 'ml.lc.jenkins@gmail.com'
         }
     }
 } 
