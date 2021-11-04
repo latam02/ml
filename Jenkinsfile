@@ -8,23 +8,23 @@ pipeline {
     TAG_VERSION = '1.4'
   }
   stages {
-    stage('UnitTest') {
-      agent {
-        docker { 
-          image 'crgv/tensorflow-c:2.6.2'
-          }
-      }
-      steps { 
-          sh 'pip install --upgrade pip'
-          sh 'pip install -r requirements-dev.txt --no-cache-dir'
-          sh 'python -m pytest --html=report.html -s'
-      }
-      post {
-        always {
-          archiveArtifacts artifacts: '**/*.html', followSymlinks: false
-        }
-      }
-    }
+    // stage('UnitTest') {
+    //   agent {
+    //     docker { 
+    //       image 'crgv/tensorflow-c:2.6.2'
+    //       }
+    //   }
+    //   steps { 
+    //       sh 'pip install --upgrade pip'
+    //       sh 'pip install -r requirements-dev.txt --no-cache-dir'
+    //       sh 'python -m pytest --html=report.html -s'
+    //   }
+    //   post {
+    //     always {
+    //       archiveArtifacts artifacts: '**/*.html', followSymlinks: false
+    //     }
+    //   }
+    // }
     stage("CodeQuality") {
       steps {
           withSonarQubeEnv('sonarqube') {
@@ -39,22 +39,22 @@ pipeline {
           }
         }
     }
-    stage('Package') {
-      steps {
-        sh 'docker build -t ${IMAGE_NAME}:${TAG_VERSION} .'
-      }
-    }
-    stage('Publish') {
-      steps {
-        sh 'docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}'
-        sh 'docker tag ${IMAGE_NAME}:${TAG_VERSION} ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}'
-        sh 'docker push ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}'
-      }
-    }
-    stage('Deploy') {
-      steps {
-        sh 'docker-compose up -d'
-      }
-    }
+    // stage('Package') {
+    //   steps {
+    //     sh 'docker build -t ${IMAGE_NAME}:${TAG_VERSION} .'
+    //   }
+    // }
+    // stage('Publish') {
+    //   steps {
+    //     sh 'docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}'
+    //     sh 'docker tag ${IMAGE_NAME}:${TAG_VERSION} ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}'
+    //     sh 'docker push ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}'
+    //   }
+    // }
+    // stage('Deploy') {
+    //   steps {
+    //     sh 'docker-compose up -d'
+    //   }
+    // }
   }
 } 
