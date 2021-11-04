@@ -70,11 +70,8 @@ pipeline {
     // }
   }
   post {
-        always {
-            mail bcc: '', body: 'always', cc: '', from: '', replyTo: '', subject: 'always', to: 'ml.lc.jenkins@gmail.com'
-        }
         failure {
-            mail bcc: '', body: 'fail', cc: '', from: '', replyTo: '', subject: 'fail at the end', to: 'ml.lc.jenkins@gmail.com'
+            mail body: 'fail', from: 'Jenkins', subject: 'fail at the end', to: 'ml.lc.jenkins@gmail.com'
             echo 'failed pipeline'
         }
     }
