@@ -32,24 +32,17 @@ pipeline {
             }
           }
       post {
-        success {
-            mail bcc: '', body: 'exito', cc: '', from: '', replyTo: '', subject: 'successful stage', to: 'ml.lc.jenkins@gmail.com'
-            echo 'success stage'
+        failure {
+            mail bcc: '', body: 'failure', cc: '', from: '', replyTo: '', subject: 'failed stage Code Quality', to: 'ml.lc.jenkins@gmail.com'
         }
     }
     }
     stage("Quality Gate") {
-      
-        steps {
-          try{
+      steps {
           timeout(time: 5, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
           }
-          } catch (err) {
-        mail bcc: '', body: '${err}' , cc: '', from: '', replyTo: '', subject: 'failed stage Quality Gate', to: 'ml.lc.jenkins@gmail.com'
-      }
         }
-      
       post {
         failure {
             mail bcc: '', body: 'failure', cc: '', from: '', replyTo: '', subject: 'failed stage Quality Gate', to: 'ml.lc.jenkins@gmail.com'
