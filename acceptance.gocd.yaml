@@ -41,7 +41,7 @@ pipelines:
                 - docker-compose up -d
                 command: bash
                 
-    - Quality:
+    - acceptance_test:
         fetch_materials: true
         jobs:
           code:
