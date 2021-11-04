@@ -25,7 +25,7 @@ pipelines:
                 pipeline: ml_fc
                 stage: Publish
                 job: publisher_job
-                src: docker-compose.yml
+                source: docker-compose.yml
                 run_if: passed
                 is_file: true
             - exec:
