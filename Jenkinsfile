@@ -72,5 +72,8 @@ pipeline {
         failure {
             mail bcc: '', body: 'fail', cc: '', from: '', replyTo: '', subject: 'fail at the end', to: 'ml.lc.jenkins@gmail.com'
         }
+        aborted {
+            mail bcc: '', body: 'fail', cc: '', from: '', replyTo: '', subject: 'ther was an aborted stage', to: 'ml.lc.jenkins@gmail.com'
+        }
     }
 } 
