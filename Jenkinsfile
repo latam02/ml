@@ -46,8 +46,7 @@ pipeline {
         }
       post {
         failure {
-            mail bcc: '', body: 'failure', cc: '', from: '', replyTo: '', subject: 'failed stage', to: 'ml.lc.jenkins@gmail.com'
-            echo 'fail stage'
+            mail bcc: '', body: 'failure', cc: '', from: '', replyTo: '', subject: 'failed stage Quality Gate', to: 'ml.lc.jenkins@gmail.com'
         }
     }
        
@@ -73,7 +72,6 @@ pipeline {
   post {
         always {
             mail bcc: '', body: 'always', cc: '', from: '', replyTo: '', subject: 'always', to: 'ml.lc.jenkins@gmail.com'
-            echo 'always email'
         }
         failure {
             mail bcc: '', body: 'fail', cc: '', from: '', replyTo: '', subject: 'fail at the end', to: 'ml.lc.jenkins@gmail.com'
