@@ -22,7 +22,7 @@ pipelines:
     - UnitTest:
         fetch_materials: true
         jobs:
-          unit:
+          tester_job:
             resources:
               - ubuntu
             timeout: 0
@@ -52,7 +52,7 @@ pipelines:
     - codeQuality:
         fetch_materials: true
         jobs:
-          unit:
+          coder_job:
             resources:
               - centos
             timeout: 0
@@ -67,7 +67,7 @@ pipelines:
     - Publish:
         fetch_materials: true
         jobs:
-          unit:
+          publisher_job:
             resources:
               - docker
             timeout: 0

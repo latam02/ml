@@ -1,0 +1,51 @@
+format_version: 10
+pipelines:
+  ml_fc_acceptance:
+    group: latam02-ml
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    environment_variables:
+      IMAGE_NAME: 'machine_learning_fc'
+      TAG_VERSION: '1.0'
+    materials:
+      ml_fc:
+        pipeline: ml_fc
+        stage: Publish
+    stages:
+    - Deploy:
+        fetch_materials: false
+        jobs:
+          deploy_job:
+            resources:
+              - docker
+            timeout: 0
+            tasks:
+            - fetch_artifact:
+              pipeline: ml_fc
+              stage: Publish
+              job: publisher_job
+              src: docker-compose.yml
+              run_if: passed
+              is_file: true
+            - exec:
+                arguments:
+                - -c
+                - docker-compose up -d
+                command: bash
+                run_if: passed
+
+    - codeQuality:
+        fetch_materials: true
+        jobs:
+          unit:
+            resources:
+              - centos
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - -c
+                - echo run acceptance tests
+                command: bash
+                run_if: passed
