@@ -27,7 +27,14 @@ pipelines:
                 job: publisher
                 source: docker-compose.yml
                 run_if: passed
-                is_file: true 
+                is_file: true
+            - fetch:
+                pipeline: ml-lc
+                stage: Publish
+                job: publisher
+                source: .env.dev
+                run_if: passed
+                is_file: true  
             - exec:
                 arguments:
                 - -c
