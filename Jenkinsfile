@@ -39,14 +39,20 @@ pipeline {
     }
     }
     stage("Quality Gate") {
-      steps {
+      try{
+        steps {
           timeout(time: 5, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
           }
         }
+
+      } catch (err) {
+        mail bcc: '', body: '${err}' , cc: '', from: '', replyTo: '', subject: 'failed stage Quality Gate', to: 'ml.lc.jenkins@gmail.com'
+      }
+      
       post {
         failure {
-            mail body: 'failure', from: 'Jenkins', subject: 'failed stage Quality Gate', to: 'ml.lc.jenkins@gmail.com'
+            mail bcc: '', body: 'failure', cc: '', from: '', replyTo: '', subject: 'failed stage Quality Gate', to: 'ml.lc.jenkins@gmail.com'
         }
     }
        
@@ -69,10 +75,9 @@ pipeline {
     //   }
     // }
   }
-  post {
+  post {  
         failure {
-            mail body: 'fail', from: 'Jenkins', subject: 'fail at the end', to: 'ml.lc.jenkins@gmail.com'
-            echo 'failed pipeline'
+            mail bcc: '', body: 'fail', cc: '', from: '', replyTo: '', subject: 'fail at the end', to: 'ml.lc.jenkins@gmail.com'
         }
     }
 } 
