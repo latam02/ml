@@ -8,7 +8,9 @@ pipelines:
     environment_variables:
       IMAGE_NAME: 'machine_learning_fc'
       TAG_VERSION: '1.0'
+      DOCKER_USER: 'franco98404'
     secure_variables:
+      DOCKER_PASSWORD: 'AES:YfuoN8sn0Eb5kNK9LlbxUQ==:uDzcvjKowTR0/+NKw6F01b/iC2XWAocuYjsvfj9b/q8='
       SONAR_TOKEN: AES:wS/mcdiwgIhUvkCia7ZeJA==:NQ7OhJfww/qcHLNvqhM2B4nlrAtJx/Otrn38djRqGJp9xaYV9sTdhio22aZzNxM7
     materials:
       repo:
@@ -20,7 +22,7 @@ pipelines:
     - UnitTest:
         fetch_materials: true
         jobs:
-          unit:
+          tester_job:
             resources:
               - ubuntu
             timeout: 0
@@ -43,11 +45,14 @@ pipelines:
                 - python3 -m pytest --html=report.html -s
                 command: bash
                 run_if: passed
+            artifacts:
+              - build:
+                  source: report.html
 
     - codeQuality:
         fetch_materials: true
         jobs:
-          unit:
+          coder_job:
             resources:
               - centos
             timeout: 0
@@ -58,3 +63,41 @@ pipelines:
                 - /home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner   -Dsonar.organization=latam02mlfc   -Dsonar.projectKey=MachineLearningFC   -Dsonar.sources=.   -Dsonar.host.url=https://sonarcloud.io
                 command: bash
                 run_if: passed
+
+    - Publish:
+        fetch_materials: true
+        jobs:
+          publisher_job:
+            resources:
+              - docker
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - -c
+                - docker build -t ${IMAGE_NAME}:${TAG_VERSION} .
+                command: bash
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+                command: bash
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - docker tag ${IMAGE_NAME}:${TAG_VERSION} ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}
+                command: bash
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - docker push ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}
+                command: bash
+                run_if: passed
+            artifacts:
+              - build:
+                  source: docker-compose.yml
+              - build:
+                  source: .env.dev
