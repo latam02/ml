@@ -33,17 +33,24 @@ pipeline {
           }
       post {
         success {
-            mail bcc: '', body: 'exito', cc: '', from: '', replyTo: '', subject: 'hola', to: 'ml.lc.jenkins@gmail.com'
-            echo 'success'
+            mail bcc: '', body: 'exito', cc: '', from: '', replyTo: '', subject: 'successful stage', to: 'ml.lc.jenkins@gmail.com'
+            echo 'success stage'
         }
     }
     }
     stage("Quality Gate") {
-       steps {
+      steps {
           timeout(time: 5, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
           }
         }
+      post {
+        failure {
+            mail bcc: '', body: 'failure', cc: '', from: '', replyTo: '', subject: 'failed stage', to: 'ml.lc.jenkins@gmail.com'
+            echo 'fail stage'
+        }
+    }
+       
     }
     // stage('Package') {
     //   steps {
@@ -65,8 +72,12 @@ pipeline {
   }
   post {
         always {
-            mail bcc: '', body: 'cuerpo', cc: '', from: '', replyTo: '', subject: 'hola', to: 'ml.lc.jenkins@gmail.com'
-            echo 'sned email'
+            mail bcc: '', body: 'always', cc: '', from: '', replyTo: '', subject: 'always', to: 'ml.lc.jenkins@gmail.com'
+            echo 'always email'
+        }
+        failure {
+            mail bcc: '', body: 'fail', cc: '', from: '', replyTo: '', subject: 'fail at the end', to: 'ml.lc.jenkins@gmail.com'
+            echo 'failed pipeline'
         }
     }
 } 
