@@ -39,16 +39,16 @@ pipeline {
     }
     }
     stage("Quality Gate") {
-      try{
+      
         steps {
+          try{
           timeout(time: 5, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
           }
-        }
-
-      } catch (err) {
+          } catch (err) {
         mail bcc: '', body: '${err}' , cc: '', from: '', replyTo: '', subject: 'failed stage Quality Gate', to: 'ml.lc.jenkins@gmail.com'
       }
+        }
       
       post {
         failure {
