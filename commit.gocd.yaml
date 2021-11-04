@@ -101,3 +101,5 @@ pipelines:
             artifacts:
               - build: 
                   source: docker-compose.yml
+              - build: 
+                  source: .env.dev
