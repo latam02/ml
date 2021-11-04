@@ -31,13 +31,24 @@ pipeline {
               sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner -Dsonar.organization=latam02-lc-ml -Dsonar.projectKey=lc-ml -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io'
             }
           }
+      post {
+        failure {
+            mail bcc: '', body: 'There was an eror and Code Quality Stage Failed', cc: '', from: '', replyTo: '', subject: 'Stage CodeQuality Failed', to: 'ml.lc.jenkins@gmail.com'
+        }
+    }
     }
     stage("Quality Gate") {
-       steps {
-          timeout(time: 1, unit: 'HOURS') {
+      steps {
+          timeout(time: 5, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
           }
         }
+      post {
+        failure {
+            mail bcc: '', body: 'There was an eror and Quality Gate Stage Failed', cc: '', from: '', replyTo: '', subject: 'Stage Quality Gate Failed', to: 'ml.lc.jenkins@gmail.com'
+        }
+    }
+       
     }
     stage('Package') {
       steps {
@@ -57,4 +68,12 @@ pipeline {
       }
     }
   }
+  post {  
+       aborted {
+            mail bcc: '', body: 'Ther was an aborted stage during Pipeline execution', cc: '', from: '', replyTo: '', subject: 'Aborted Stage', to: 'ml.lc.jenkins@gmail.com'
+        }
+       success {
+            mail bcc: '', body: 'The execution of the Pipeline was successful', cc: '', from: '', replyTo: '', subject: 'Successful Pipeline execution', to: 'ml.lc.jenkins@gmail.com'
+        }
+    }
 } 
