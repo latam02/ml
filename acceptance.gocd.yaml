@@ -45,7 +45,7 @@ pipelines:
     - acceptanceTesting:
         fetch_materials: true
         jobs:
-          unit:
+          acceptance_jobs:
             resources:
               - centos
             timeout: 0
