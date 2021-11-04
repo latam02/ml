@@ -46,7 +46,7 @@ pipeline {
         }
       post {
         failure {
-            mail bcc: '', body: 'failure', cc: '', from: '', replyTo: '', subject: 'failed stage Quality Gate', to: 'ml.lc.jenkins@gmail.com'
+            mail body: 'failure', from: 'Jenkins', subject: 'failed stage Quality Gate', to: 'ml.lc.jenkins@gmail.com'
         }
     }
        
