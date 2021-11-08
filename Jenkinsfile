@@ -23,9 +23,6 @@ pipeline {
         always {
           archiveArtifacts artifacts: '**/*.html', followSymlinks: false
         }
-        failure {
-            mail bcc: '', body: 'There was an error and Unit Test Stage Failed', cc: '', from: '', replyTo: '', subject: 'Stage Unit Test Failed', to: 'ml.lc.jenkins@gmail.com'
-        }
       }
     }
     stage("CodeQuality") {
@@ -34,32 +31,17 @@ pipeline {
               sh '/var/jenkins_home/sonar-scanner-4.4.0.2170-linux/bin/sonar-scanner -Dsonar.organization=latam02-lc-ml -Dsonar.projectKey=lc-ml -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io'
             }
           }
-      post {
-        failure {
-            mail bcc: '', body: 'There was an error and Code Quality Stage Failed', cc: '', from: '', replyTo: '', subject: 'Stage CodeQuality Failed', to: 'ml.lc.jenkins@gmail.com'
-        }
-      }
     }
     stage("Quality Gate") {
       steps {
           timeout(time: 5, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
           }
-        }
-      post {
-        failure {
-            mail bcc: '', body: 'There was an error and Quality Gate Stage Failed', cc: '', from: '', replyTo: '', subject: 'Stage Quality Gate Failed', to: 'ml.lc.jenkins@gmail.com'
-        }
-      }     
+        }    
     }
     stage('Package') {
       steps {
         sh 'docker build -t ${IMAGE_NAME}:${TAG_VERSION} .'
-      }
-      post {
-        failure {
-            mail bcc: '', body: 'There was an error and Package Stage Failed', cc: '', from: '', replyTo: '', subject: 'Stage Package Failed', to: 'ml.lc.jenkins@gmail.com'
-        }
       }
     }
     stage('Publish') {
@@ -68,30 +50,28 @@ pipeline {
         sh 'docker tag ${IMAGE_NAME}:${TAG_VERSION} ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}'
         sh 'docker push ${DOCKER_USER}/${IMAGE_NAME}:${TAG_VERSION}'
       }
-      post {
-        failure {
-            mail bcc: '', body: 'There was an error and Public Stage Failed', cc: '', from: '', replyTo: '', subject: 'Stage Publish Failed', to: 'ml.lc.jenkins@gmail.com'
-        }
-      }
     }
     stage('Deploy') {
       steps {
         sh 'docker-compose up -d'
       }
-      post {
-        failure {
-            mail bcc: '', body: 'There was an error and Deploy Stage Failed', cc: '', from: '', replyTo: '', subject: 'Deployment Failed', to: 'ml.lc.jenkins@gmail.com'
-        }
+    }
+    stage('Acceptance Testing'){
+      steps{
+        echo 'Run acceptance tests'
       }
     }
   }
   post {  
        aborted {
-            mail bcc: '', body: 'Ther was an aborted stage during Pipeline execution', cc: '', from: '', replyTo: '', subject: 'Aborted Stage', to: 'ml.lc.jenkins@gmail.com'
+            emailext attachLog: true, body: 'Ther was an aborted stage during Pipeline execution. Check console output at $BUILD_URL to view the results.', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'ml.lc.jenkins@gmail.com'
         }
        success {
-            mail bcc: '', body: 'The execution of the Pipeline was successful', cc: '', from: '', replyTo: '', subject: 'Successful Pipeline execution', to: 'ml.lc.jenkins@gmail.com'
+            emailext attachLog: true, body: 'The execution of the Pipeline was successful. Check console output at $BUILD_URL to view the results.', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'ml.lc.jenkins@gmail.com'
         }
+       failure {
+            emailext attachLog: true, body: 'The pipeline execution failed!. Check console output at $BUILD_URL to view the results.', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'ml.lc.jenkins@gmail.com'
+       } 
   }
 } 
 
