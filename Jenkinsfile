@@ -50,7 +50,7 @@ pipeline {
         failure {
             mail bcc: '', body: 'There was an error and Quality Gate Stage Failed', cc: '', from: '', replyTo: '', subject: 'Stage Quality Gate Failed', to: 'ml.lc.jenkins@gmail.com'
         }
-    }     
+      }     
     }
     stage('Package') {
       steps {
@@ -94,3 +94,4 @@ pipeline {
         }
   }
 } 
+
